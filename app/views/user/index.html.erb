@@ -1,0 +1,34 @@
+<html>
+<header>
+  <title>
+    HELLO
+  </title>
+</header>
+<body>
+<p>
+ <h1>
+   PhotoSite User List
+ </h1>
+<h4>
+  There are
+  <%=@users_all.count%>
+  users
+</h4>
+<table>
+  <tr>
+    <th>User</th>
+    <th>First</th>
+    <th>Last</th>
+  </tr>
+  <%for user in @users_all%>
+  <tr>
+    <td><%=user.id%></td>
+    <td><%= link_to user.first_name,{:controller => "photo", :action => "index", :id => user.id} %> </td>
+    <!--<td><a href="/photos/index/id"><%=user.first_name%></a></td> -->
+    <td><%=user.last_name%></td>
+  </tr>
+      <% end %>
+</table>
+</p>
+</body>
+</html>

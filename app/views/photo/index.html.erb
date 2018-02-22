@@ -1,0 +1,47 @@
+<html>
+<head>
+  <style>
+    figure {
+      display: block;
+      margin-left : 40px;
+      margin-right: 40px;
+    }
+  </style>
+</head>
+
+<body>
+<p>
+<% for user in @user %>
+<h1>
+  Photos of <%= user.first_name%><%=user.last_name%>
+</h1>
+<% end %>
+<% for photos in @photos%>
+<figure>
+  <%= image_tag(photos.file_name)%> <p><strong>Created at : </strong><%=photos.date_time%></p>
+</figure>
+
+
+
+  <%@comments = photos.comments%>
+    <p><strong> <%=@comments.count%>  Comments</strong></p>
+    <% for comments in @comments %>
+
+        <p><strong>Commented By:</strong>
+        <% @user = User.find(comments.user_id)%>
+        <% uname = @user.first_name + "\s" + @user.last_name %>
+        <%= link_to uname, {:controller => "photo", :action => "index", :id => @user.id} %>
+        on
+        <%=comments.date_time%>
+        </p>
+        <%"\n"%>
+        <%= comments.comment_text%>
+        <br/>
+    <%end%>
+<br/><br/><br/><br/>
+
+<% end %>
+
+</p>
+</body>
+</html>
